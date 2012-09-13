@@ -1,0 +1,1 @@
+rails generate scaffold Shot caption:string description:string user_id:integer likes:integer

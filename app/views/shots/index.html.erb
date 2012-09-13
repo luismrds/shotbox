@@ -1,0 +1,28 @@
+<h1>Recent shots</h1>
+
+<table>
+  <tr>
+    <th>Caption</th>
+    <th>Description</th>
+    <th>User</th>
+    <th>Likes</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @shots.each do |shot| %>
+  <tr>
+    <td><%= shot.caption %></td>
+    <td><%= shot.description %></td>
+    <td><%= shot.user_id %></td>
+    <td><%= shot.likes %></td>
+    <td><%= link_to 'Show', shot %></td>
+    <td><%= link_to 'Edit', edit_shot_path(shot) %></td>
+    <td><%= link_to 'Destroy', shot, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<%= link_to 'New Shot', new_shot_path %>

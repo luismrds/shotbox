@@ -1,0 +1,5 @@
+h1. ShotBox
+
+This is a Dribble clon.
+
+The app foundation is the example given by @rails_apps and it can be found on https://github.com/RailsApps/rails3-bootstrap-devise-cancan
