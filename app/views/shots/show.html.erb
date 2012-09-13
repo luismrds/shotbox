@@ -1,9 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Caption:</b>
+<h1>
+  <%= @shot.user.name%>
+</h1>
+
+<h3>
   <%= @shot.caption %>
-</p>
+</h3>
+
+<%= image_tag @shot.shot.url(:medium) %>
 
 <p>
   <b>Description:</b>

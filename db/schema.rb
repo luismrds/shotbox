@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120913201520) do
+ActiveRecord::Schema.define(:version => 20120913213322) do
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -29,8 +29,12 @@ ActiveRecord::Schema.define(:version => 20120913201520) do
     t.string   "description"
     t.integer  "user_id"
     t.integer  "likes"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "shot_file_name"
+    t.string   "shot_content_type"
+    t.integer  "shot_file_size"
+    t.datetime "shot_updated_at"
   end
 
   create_table "users", :force => true do |t|

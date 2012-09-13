@@ -1,1 +1,3 @@
 rails generate scaffold Shot caption:string description:string user_id:integer likes:integer
+rails generate paperclip shot shot
+
