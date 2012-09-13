@@ -25,6 +25,18 @@
   <%= @shot.likes %>
 </p>
 
+<% if currentUserLikes(@shot) %>
+<p>
+  <%= link_to "Dislike!", dislikeshot_path(@shot.id)%>
+</p>
+<% end %>
+
+<% if !currentUserLikes(@shot) %>
+<p>
+  <%= link_to "Like!", likeshot_path(@shot.id)%>
+</p>
+<% end %>
+
 
 <%= link_to 'Edit', edit_shot_path(@shot) %> |
 <%= link_to 'Back', shots_path %>

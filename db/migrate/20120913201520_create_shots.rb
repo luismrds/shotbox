@@ -4,7 +4,7 @@ class CreateShots < ActiveRecord::Migration
       t.string :caption
       t.string :description
       t.integer :user_id
-      t.integer :likes
+      t.integer :likes , :default => 0
 
       t.timestamps
     end

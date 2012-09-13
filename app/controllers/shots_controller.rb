@@ -81,4 +81,36 @@ class ShotsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def like  
+    shot = Shot.find(params[:shot_id])
+    @like = Like.new()
+    @like.shot_id = shot.id
+    @like.user_id = current_user.id
+    
+    respond_to do |format|
+      if @like.save
+        shot.likes = shot.likes + 1 
+        shot.save
+        format.html { redirect_to shot, notice: 'Shot was successfully liked.' }
+        format.json { render json: shot, status: :liked, location: @shot }
+      else
+        format.html { render action: "show" }
+        format.json { render json: shot.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def dislike  
+    shot = Shot.find(params[:shot_id])
+    @like = Like.find_by_user_id_and_shot_id(current_user, shot.id)
+    @like.destroy
+    shot.likes = shot.likes - 1
+    shot.save
+    
+    respond_to do |format|
+      format.html { redirect_to shot }
+      format.json { head :no_content }
+      end
+  end
 end

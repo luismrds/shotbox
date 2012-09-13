@@ -1,3 +1,5 @@
 rails generate scaffold Shot caption:string description:string user_id:integer likes:integer
 rails generate paperclip shot shot
 
+rails generate model Like user_id:integer shot_id:integer
+rails generate controller Like like dislike
