@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120914030001) do
+ActiveRecord::Schema.define(:version => 20120914074358) do
 
   create_table "comments", :force => true do |t|
     t.integer  "user_id"
@@ -20,6 +20,9 @@ ActiveRecord::Schema.define(:version => 20120914030001) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "comments", ["shot_id"], :name => "index_comments_on_shot_id"
+  add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
   create_table "follows", :force => true do |t|
     t.string   "follower_type"
@@ -30,7 +33,9 @@ ActiveRecord::Schema.define(:version => 20120914030001) do
   end
 
   add_index "follows", ["followable_id", "followable_type"], :name => "fk_followables"
+  add_index "follows", ["followable_id"], :name => "index_follows_on_followable_id"
   add_index "follows", ["follower_id", "follower_type"], :name => "fk_follows"
+  add_index "follows", ["follower_id"], :name => "index_follows_on_follower_id"
 
   create_table "likes", :force => true do |t|
     t.integer  "user_id"
@@ -38,6 +43,9 @@ ActiveRecord::Schema.define(:version => 20120914030001) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "likes", ["shot_id"], :name => "index_likes_on_shot_id"
+  add_index "likes", ["user_id"], :name => "index_likes_on_user_id"
 
   create_table "mentions", :force => true do |t|
     t.string   "mentioner_type"
@@ -74,6 +82,8 @@ ActiveRecord::Schema.define(:version => 20120914030001) do
     t.datetime "shot_updated_at"
   end
 
+  add_index "shots", ["user_id"], :name => "index_shots_on_user_id"
+
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
@@ -86,10 +96,14 @@ ActiveRecord::Schema.define(:version => 20120914030001) do
 
   add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
   add_index "taggings", ["taggable_id", "taggable_type", "context"], :name => "index_taggings_on_taggable_id_and_taggable_type_and_context"
+  add_index "taggings", ["taggable_id"], :name => "index_taggings_on_taggable_id"
+  add_index "taggings", ["tagger_id"], :name => "index_taggings_on_tagger_id"
 
   create_table "tags", :force => true do |t|
     t.string "name"
   end
+
+  add_index "tags", ["name"], :name => "index_tags_on_name"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
