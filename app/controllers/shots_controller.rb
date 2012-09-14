@@ -2,8 +2,12 @@ class ShotsController < ApplicationController
   # GET /shots
   # GET /shots.json
   def index
-    @shots = Shot.all
-
+    tag = params[:tag]
+    if tag
+      @shots = Shot.tagged_with(tag)
+    else 
+      @shots = Shot.all
+    end 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @shots }
@@ -116,11 +120,22 @@ class ShotsController < ApplicationController
       end
   end
 
-  def comment
-    
+  def add_tag
+    tags = params[:tag].split
+    shot = Shot.find(params[:shot_id])
+    shot.tag_list << tags
+    shot.save 
+    redirect_to shot
   end
 
-  def delete_comment
-    
+  def index_by_tag
+    tag = params[:tag]
+    @shots = Shot.tagged_with(tag)
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @shots }
+    end
   end
+
 end

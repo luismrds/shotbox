@@ -21,3 +21,4 @@ gem "rolify", ">= 3.2.0"
 gem 'therubyracer'
 gem 'acts-as-taggable-on', '~> 2.3.1'
 gem "paperclip", "~> 3.0"
+gem 'will_paginate', '~> 3.0'
