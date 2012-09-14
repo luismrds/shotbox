@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @shots = Shot.find_all_by_user_id(@user).paginate(:page => params[:page], :per_page => 12)
   end
 
   def follow

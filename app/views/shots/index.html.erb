@@ -1,30 +1,29 @@
-<h1>Recent shots</h1>
+<h1><%=h @title %></h1>
+<br>
+<div class="row-fluid">
+  <div class="span8">
+    <% i = 0 %>
+    <% @shots.each do |shot| %>
+      <% if i%3 == 0 %>
+    <div class="row-fluid">
+      <% end %>    
+      <% i = i + 1%>
+      <div class="span4" align = "center">
+        <%= image_tag shot.shot.url(:medium)%> <%=h link_to shot.caption, shot %>
+      </div> <!-- span4 -->
+      <% if i%3 == 0 %>
+    </div> <!--fin row--></br>
+      <% end %>
+    <% end %>
+    <% if i%3 != 0 %>
+</div> <!--fin row--></br>
+    <% end %>
+  </div> <!-- span 8-->
 
-<table>
-  <tr>
-    <th>Caption</th>
-    <th>Description</th>
-    <th>User</th>
-    <th>Likes</th>
-    <th>Tweet</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @shots.each do |shot| %>
-  <tr>
-    <td><%= shot.caption %></td>
-    <td><%= shot.description %></td>
-    <td><%= shot.user_id %></td>
-    <td><%= shot.likes %></td>
-    <td><%= tweet_button(:via => "ShotBox", :text => "Lok at this amazing Shot at @ShotBox")%></td>
-    <td><%= link_to 'Show', shot %></td>
-    <td><%= link_to 'Edit', edit_shot_path(shot) %></td>
-    <td><%= link_to 'Destroy', shot, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+  <div class="span4" align = "center">
+    Extra 
+  </div>
+</div>
 
 <br />
 <% if user_signed_in?%>

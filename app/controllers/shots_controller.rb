@@ -5,12 +5,30 @@ require 'will_paginate/array'
   # GET /shots
   # GET /shots.json
   def index
+    @title = "recent shots"
     tag = params[:tag]
+    user = params[:user]
+    like = params[:likes]
     if tag
+      @title = "Tag: " + tag
       @shots = Shot.tagged_with(tag).paginate(:page => params[:page], :per_page => 12)
     else 
-      @shots = Shot.all.paginate(:page => params[:page], :per_page => 12)
+      if user 
+        @title = User.find(user).name + " shots."
+        @shots = Shot.find_all_by_user_id(user).paginate(:page => params[:page], :per_page => 12)
+      else 
+        @shots = Shot.all.paginate(:page => params[:page], :per_page => 12)
+      end
     end 
+    if like
+      @title = "This is what " + User.find(user).name + " likes."
+      likes = Like.find_all_by_user_id(user)
+      @shots = []
+      likes.each{|l|
+        @shots << Shot.find(l.shot_id)
+      }
+      @shots = @shots.paginate
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @shots }
@@ -101,7 +119,7 @@ require 'will_paginate/array'
       if @like.save
         shot.likes = shot.likes + 1 
         shot.save
-        format.html { redirect_to shot, notice: 'Shot was successfully liked.' }
+        format.html { redirect_to shot }
         format.json { render json: shot, status: :liked, location: @shot }
       else
         format.html { render action: "show" }
@@ -126,9 +144,9 @@ require 'will_paginate/array'
   def add_tag
     tags = params[:tag].split
     shot = Shot.find(params[:shot_id])
-    shot.tag_list << tags
+    current_user.tag(shot, :with => tags, :on => :tags)
+    #shot.tag_list << tags
     shot.save 
     redirect_to shot
   end
-
 end

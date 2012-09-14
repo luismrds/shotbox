@@ -4,6 +4,8 @@ class Shot < ActiveRecord::Base
 
   acts_as_taggable_on :tags #:colors, :themes
 
+  acts_as_likeable
+
   belongs_to :user
   has_many :comments
 end

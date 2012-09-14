@@ -1,16 +1,56 @@
 
-<h3><%= @user.name %>
+<h3><%= @user.name%><font size = "2"> (Followers:<%=h @user.followers(User).size  %>)
 <font size = "2">
-<% if user_signed_in? %>
-  <% if !@user.followed_by?(current_user)%>
-    <%= link_to("Follow", :action => :follow, :following => @user)%>
-  <% end %>
+  <% if user_signed_in? && @user!=current_user%>
+    <% if !@user.followed_by?(current_user)%>
+      <%= link_to("Follow", :action => :follow, :following => @user)%>
+    <% end %>
 
-  <% if @user.followed_by?(current_user)%>
-    <%= link_to("Unfollow", :action => :unfollow, :unfollowing => @user)%>
+    <% if @user.followed_by?(current_user)%>
+      <%= link_to("Unfollow", :action => :unfollow, :unfollowing => @user)%>
+    <% end %>
   <% end %>
-<% end %>
+</font></h3>
 
-</font>
+<div class="row-fluid" align = "center">
+  <%= link_to "Shots", :controller => "shots", :action => "index", :user => @user%>
+  <%= link_to "Likes", :controller => "shots", :action => "index", :user => @user, :likes => true%>
+</div>
+
+<br>
+
+<div class="row-fluid">
+  <div class="span8">
+    <% i = 0 %>
+    <% @shots.each do |shot| %>
+      <% if i%3 == 0 %>
+    <div class="row-fluid">
+      <% end %>    
+      <% i = i + 1%>
+      <div class="span4" align = "center">
+        <%= image_tag shot.shot.url(:medium)%> <%=h link_to shot.caption, shot %>
+      </div> <!-- span4 -->
+      <% if i%3 == 0 %>
+    </div> <!--fin row--></br>
+      <% end %>
+    <% end %>
+    <% if i%3 != 0 %>
+</div> <!--fin row--></br>
+    <% end %>
+  </div> <!-- span 8-->
+
+  <div class="span4" align = "center">
+    Extra 
+  </div>
+</div>
+
+<br />
+
+<div class="digg_pagination" align = "center"> 
+    <div clas="page_info">
+      <%= page_entries_info @shots %>
+    </div>
+    <%= will_paginate @shots, :container => false %>
+</div>
 
 </h3>

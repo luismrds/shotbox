@@ -5,7 +5,7 @@
 </h3>
 
 <p>
-  by: <%= @shot.user.name%>
+  by:  <%= link_to @shot.user.name, @shot.user%>
 </p>
 <div class="row-fluid">
   <div class="span6">
@@ -27,6 +27,24 @@
       <%= @shot.likes %>
     </p>
 
+    <div class="row-fluid">
+      <%= link_to image_tag("FaceBookIcon.png"), 'http://www.facebook.com/sharer.php?u='+request.fullpath, :target => :blank %>
+      <% if user_signed_in? %>
+        <% if currentUserLikes(@shot) %>
+          <%= link_to "Dislike!", dislikeshot_path(@shot.id)%>
+        <% end %>
+
+        <% if !currentUserLikes(@shot) %>
+          <%= link_to "Like!", likeshot_path(@shot.id)%>
+        <% end %>
+      <% end %>
+
+
+
+      <%= tweet_button(:via => "ShotBox", :count=>"none", :text => "Look at this amazing Shot at @ShotBox")%>
+    </div>
+<br/>
+
     <% if @shot.tag_list.size > 0 %>
       Tags: 
         <% @shot.tags.each do |t| %>
@@ -44,20 +62,6 @@
 
           <div><%= submit_tag 'Add' %></div>
         <% end %>
-    <% end %>
-
-    <% if user_signed_in? %>
-      <% if currentUserLikes(@shot) %>
-      <p>
-        <%= link_to "Dislike!", dislikeshot_path(@shot.id)%>
-      </p>
-      <% end %>
-
-      <% if !currentUserLikes(@shot) %>
-      <p>
-        <%= link_to "Like!", likeshot_path(@shot.id)%>
-      </p>
-      <% end %>
     <% end %>
 
     <% @comments.each do |c|%>
