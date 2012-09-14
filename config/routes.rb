@@ -17,10 +17,13 @@ Rails3BootstrapDeviseCancan::Application.routes.draw do
 
   resources :shots
 
+  match "users/follow/:following" => "users#follow", :as => :follow
+  match "users/unfollow/:unfollowing" => "users#unfollow", :as => :unfollow
+
   authenticated :user do
     root :to => 'shots#index'
   end
-  root :to => "shot#index"
+  root :to => "shots#index"
   devise_for :users
   resources :users, :only => [:show, :index]
 end

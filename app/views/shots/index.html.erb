@@ -6,6 +6,7 @@
     <th>Description</th>
     <th>User</th>
     <th>Likes</th>
+    <th>Tweet</th>
     <th></th>
     <th></th>
     <th></th>
@@ -17,6 +18,7 @@
     <td><%= shot.description %></td>
     <td><%= shot.user_id %></td>
     <td><%= shot.likes %></td>
+    <td><%= tweet_button(:via => "ShotBox", :text => "Lok at this amazing Shot at @ShotBox")%></td>
     <td><%= link_to 'Show', shot %></td>
     <td><%= link_to 'Edit', edit_shot_path(shot) %></td>
     <td><%= link_to 'Destroy', shot, method: :delete, data: { confirm: 'Are you sure?' } %></td>

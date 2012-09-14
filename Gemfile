@@ -22,3 +22,5 @@ gem 'therubyracer'
 gem 'acts-as-taggable-on', '~> 2.3.1'
 gem "paperclip", "~> 3.0"
 gem 'will_paginate'
+gem "tweet-button"
+gem "socialization"
