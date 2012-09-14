@@ -71264,3 +71264,5 @@ Migrating to CreateMentions (20120914030001)
 [0m
 Connecting to database specified by database.yml
 DEPRECATION WARNING: Passing a block to devise_for is deprecated. Please remove the block from devise_for (only the block, the call to devise_for must still exist) and call devise_scope :user do ... end with the block instead. (called from block in <top (required)> at /home/luis/ShotBox/ShotBox/config/routes.rb:28)
+Connecting to database specified by database.yml
+DEPRECATION WARNING: Passing a block to devise_for is deprecated. Please remove the block from devise_for (only the block, the call to devise_for must still exist) and call devise_scope :user do ... end with the block instead. (called from block in <top (required)> at /home/luis/ShotBox/ShotBox/config/routes.rb:28)

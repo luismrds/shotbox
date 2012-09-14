@@ -26,6 +26,5 @@ gem 'will_paginate'
 gem "tweet-button"
 gem "socialization"
 gem "heroku"
-group :production do
-  gem 'thin'
-end
+gem 'thin'
+
