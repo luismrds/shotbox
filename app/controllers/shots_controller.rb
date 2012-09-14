@@ -1,12 +1,15 @@
 class ShotsController < ApplicationController
+
+require 'will_paginate/array'
+
   # GET /shots
   # GET /shots.json
   def index
     tag = params[:tag]
     if tag
-      @shots = Shot.tagged_with(tag)
+      @shots = Shot.tagged_with(tag).paginate(:page => params[:page], :per_page => 12)
     else 
-      @shots = Shot.all
+      @shots = Shot.all.paginate(:page => params[:page], :per_page => 12)
     end 
     respond_to do |format|
       format.html # index.html.erb
@@ -126,16 +129,6 @@ class ShotsController < ApplicationController
     shot.tag_list << tags
     shot.save 
     redirect_to shot
-  end
-
-  def index_by_tag
-    tag = params[:tag]
-    @shots = Shot.tagged_with(tag)
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @shots }
-    end
   end
 
 end

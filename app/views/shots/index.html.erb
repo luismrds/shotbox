@@ -28,3 +28,10 @@
 <% if user_signed_in?%>
   <%= link_to 'New Shot', new_shot_path %>
 <% end %>
+
+<div class="digg_pagination" align = "center"> 
+    <div clas="page_info">
+      <%= page_entries_info @shots %>
+    </div>
+    <%= will_paginate @shots, :container => false %>
+</div>
