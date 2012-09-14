@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
+ruby '1.9.3'
 gem 'rails', '3.2.8'
-gem 'sqlite3'
+gem 'pg'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
@@ -24,3 +25,7 @@ gem "paperclip", "~> 3.0"
 gem 'will_paginate'
 gem "tweet-button"
 gem "socialization"
+gem "heroku"
+group :production do
+  gem 'thin'
+end
