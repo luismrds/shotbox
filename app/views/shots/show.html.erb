@@ -25,18 +25,35 @@
   <%= @shot.likes %>
 </p>
 
-<% if currentUserLikes(@shot) %>
-<p>
-  <%= link_to "Dislike!", dislikeshot_path(@shot.id)%>
-</p>
+<% if user_signed_in? %>
+  <% if currentUserLikes(@shot) %>
+  <p>
+    <%= link_to "Dislike!", dislikeshot_path(@shot.id)%>
+  </p>
+  <% end %>
+
+  <% if !currentUserLikes(@shot) %>
+  <p>
+    <%= link_to "Like!", likeshot_path(@shot.id)%>
+  </p>
+  <% end %>
 <% end %>
 
-<% if !currentUserLikes(@shot) %>
-<p>
-  <%= link_to "Like!", likeshot_path(@shot.id)%>
-</p>
+<% @comments.each do |c|%>
+  <p><%=h c.user.name %> said:</p>
+  <p>&nbsp;&nbsp;&nbsp;<%=h c.text%></p> 
 <% end %>
 
+<% if user_signed_in? %>
+  <%= form_for @comment do |f| %>
+    <%= f.label :Comment %>
+    <%= f.text_area :text, :cols => 30, :rows => 3%><br />
+
+    <%= hidden_field_tag(:shot_id, @shot.id) %>
+
+    <%= f.submit %>
+  <% end %>
+<% end %>
 
 <%= link_to 'Edit', edit_shot_path(@shot) %> |
 <%= link_to 'Back', shots_path %>

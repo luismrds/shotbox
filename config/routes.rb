@@ -1,5 +1,14 @@
 Rails3BootstrapDeviseCancan::Application.routes.draw do
+  resources :comments 
+
+  get "comments/create"
+
+  get "comment/destroy"
+
   get "like/like"
+
+  #resources :shots
+
   match "shots/like/:shot_id" => "shots#like", :as => :likeshot
   match "shots/dislike/:shot_id" => "shots#dislike", :as => :dislikeshot
 

@@ -3,3 +3,7 @@ rails generate paperclip shot shot
 
 rails generate model Like user_id:integer shot_id:integer
 rails generate controller Like like dislike
+
+rails generate model Comment user_id:integer shot_id:integer text:string
+rails generate controller Comment create destroy
+

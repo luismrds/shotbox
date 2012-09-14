@@ -14,6 +14,8 @@ class ShotsController < ApplicationController
   # GET /shots/1.json
   def show
     @shot = Shot.find(params[:id])
+    @comment = Comment.new
+    @comments = @shot.comments
 
     respond_to do |format|
       format.html # show.html.erb
@@ -112,5 +114,13 @@ class ShotsController < ApplicationController
       format.html { redirect_to shot }
       format.json { head :no_content }
       end
+  end
+
+  def comment
+    
+  end
+
+  def delete_comment
+    
   end
 end
