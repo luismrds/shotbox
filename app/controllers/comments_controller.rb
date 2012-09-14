@@ -17,5 +17,13 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    @comment = Comment.find(params[:id])
+    shot = @comment.shot
+    @comment.destroy
+
+    respond_to do |format|
+      format.html { redirect_to shot }
+      format.json { head :no_content }
+    end
   end
 end

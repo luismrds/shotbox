@@ -41,7 +41,11 @@
 
 <% @comments.each do |c|%>
   <p><%=h c.user.name %> said:</p>
-  <p>&nbsp;&nbsp;&nbsp;<%=h c.text%></p> 
+  <p>&nbsp;&nbsp;&nbsp;<%=h c.text%> 
+  <% if c.user == current_user || c.shot.user == current_user%>
+     <%= link_to("Delete", c, :method => :delete, :confirm => "Do you really wanna delete this comment?")%></p> 
+  <% end %>
+  
 <% end %>
 
 <% if user_signed_in? %>
